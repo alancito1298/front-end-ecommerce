@@ -40,7 +40,7 @@ function ProductosTabla() {
 
     // Lógica para enviar el nuevo producto a la API
     try {
-      const response = await fetch('http://localhost:8000/producto', {
+      const response = await fetch('https://artlimpieza-back-86ch7go5w-alancito1298s-projects.vercel.app/producto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
