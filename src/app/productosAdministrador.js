@@ -14,7 +14,7 @@ useEffect(() =>{
     // Cargar los productos desde el archivo JSON en la carpeta public
     const fetchProductos = async () => {
       try {
-        const response = await fetch('https://artlimpieza-back-6aeltx3ax-alancito1298s-projects.vercel.app/producto');
+        const response = await fetch('https://artlimpieza-back-end.vercel.app/producto');
         if (!response.ok) {
           throw new Error('Error al obtener los productos');
         }

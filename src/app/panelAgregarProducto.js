@@ -26,7 +26,7 @@ const PanelAgregarProducto = ({ onAddProduct }) => {
     };
   
     try {
-      const response = await fetch('https://artlimpieza-back-6aeltx3ax-alancito1298s-projects.vercel.app/producto', {
+      const response = await fetch('https://artlimpieza-back-end.vercel.app/producto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
