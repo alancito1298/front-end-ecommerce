@@ -25,7 +25,7 @@ function Productos() {
     // Cargar los productos desde el archivo JSON en la carpeta public
     const fetchProductos = async () => {
       try {
-        const response = await fetch('https://artlimpieza-back-86ch7go5w-alancito1298s-projects.vercel.app/producto');
+        const response = await fetch('https://artlimpieza-back-efbe2s3i5-alancito1298s-projects.vercel.app/producto');
         if (!response.ok) {
           throw new Error('Error al obtener los productos');
         }
