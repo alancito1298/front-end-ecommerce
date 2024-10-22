@@ -13,17 +13,22 @@ function ProductosAdmin() {
     // Función para cargar los productos
     const fetchProductos = async () => {
       try {
-        const response = await fetch('https://artlimpieza-back-4tzgk8uo8-alancito1298s-projects.vercel.app/producto');
+        const response = await fetch('https://back-end-artlimpieza.vercel.app/producto');
         if (!response.ok) {
           throw new Error('Error al obtener los productos');
         }
         const productos = await response.json();
         console.log('Productos obtenidos:', productos);
         setProductos(productos);
+        return productos;
       } catch (error) {
         console.error('Error:', error);
+        return {};
       }
     };
+
+  
+  
     
     // Llamada inicial para obtener productos
     fetchProductos();
@@ -39,23 +44,24 @@ function ProductosAdmin() {
   };
 
   // Función para eliminar un producto
-  const eliminarProducto = async (id) => {
-    const eliminado = await borrarProducto(id);
-    if (eliminado) {
-      mostrarAviso('Producto eliminado');
-      // Actualiza la lista de productos haciendo un nuevo fetch
-      async function fetchProductos() {
-        try {
-          const response = await fetch('https://back-end-artlimpieza.vercel.app/producto');
-          const productosActualizados = await response.json();
-          setProductos(productosActualizados);
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      }
-      fetchProductos(); // Hacer el nuevo fetch después de eliminar el producto
+  const eliminarProducto = async (id) => { try {
+    const response = await fetch(`https://back-end-artlimpieza.vercel.app/producto/${id}`, {
+      method: 'DELETE',
+    });
+    
+    if (!response.ok) {
+      throw new Error('Error al eliminar el producto');
+    }else{
+      alert("producto eliminado")
     }
-  };
+
+    return true; // Retorna true si la eliminación fue exitosa
+  } catch (error) {
+    console.error('Error:', error);
+    return false; // Retorna false si hubo un error
+  } 
+    }
+  ;
 
   return (
     <div className="bg-white">
