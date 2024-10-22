@@ -9,7 +9,7 @@ const PanelAgregarProducto = ({ onAddProduct }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);// Estado para controlar el envío
 
   const handleSubmit = async (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     setIsSubmitting(true);
   
     // Valida que los campos no estén vacíos
@@ -26,7 +26,7 @@ const PanelAgregarProducto = ({ onAddProduct }) => {
     };
   
     try {
-      const response = await fetch('https://artlimpieza-back-end.vercel.app/producto', {
+      const response = await fetch('https://back-end-artlimpieza.vercel.app/producto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const PanelAgregarProducto = ({ onAddProduct }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 mx-5 my-36 bg-indigo-100 p-6 text-indigo-900 rounded-md" >
-      <h4>AGREGA UN PRODUCTO</h4>
+      <h4 className='text-4xl font-light tracking-tight text-indigo-900 uppercase'>AGREGA UN PRODUCTO</h4>
       <div>
         <label className="block text-sm font-medium text-indigo-900 ">Nombre del Producto</label>
         <input

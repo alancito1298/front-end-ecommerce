@@ -74,7 +74,7 @@ function Carrito() {
   return (
     <div className="bg-indigo-100">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900">Carrito de Compras</h2>
+        <h2 className="text-4xl font-light tracking-tight text-indigo-900 uppercase">Carrito de Compras</h2>
 
         <div className="mt-6">
           {carrito.length === 0 ? (

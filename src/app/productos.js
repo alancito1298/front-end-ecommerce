@@ -25,7 +25,7 @@ function Productos() {
     // Cargar los productos desde el archivo JSON en la carpeta public
     const fetchProductos = async () => {
       try {
-        const response = await fetch('https://artlimpieza-back-end.vercel.app/producto');
+        const response = await fetch('https://back-end-artlimpieza.vercel.app/producto');
         if (!response.ok) {
           throw new Error('Error al obtener los productos');
         }
@@ -87,9 +87,9 @@ function Productos() {
     }, 2000);
   };
   return (
-    <div className="bg-white pb-10">
-      <div className="w-1/1 max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl  lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900">Productos</h2>
+    <div className="bg-white pb-10 w-full flex flex-col items-center">
+      <div className="w-full max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl  lg:px-8">
+        <h2 className="text-2xl font-light tracking-tight text-indigo-900 uppercase">Productos</h2>
   
         <div className="mt-6 gap-x-6 gap-y-10 flex flex-col ">
           { Object.keys(productos).map(key => {

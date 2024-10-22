@@ -9,52 +9,59 @@ function ProductosAdmin() {
   const [mensaje, setMensaje] = useState(''); // Estado para el mensaje
   const [mostrarMensaje, setMostrarMensaje] = useState(false); // Estado para mostrar/ocultar mensaje
 
-useEffect(() =>{
-
-    // Cargar los productos desde el archivo JSON en la carpeta public
+  useEffect(() => {
+    // Función para cargar los productos
     const fetchProductos = async () => {
       try {
-        const response = await fetch('https://artlimpieza-back-end.vercel.app/producto');
+        const response = await fetch('https://artlimpieza-back-4tzgk8uo8-alancito1298s-projects.vercel.app/producto');
         if (!response.ok) {
           throw new Error('Error al obtener los productos');
         }
         const productos = await response.json();
         console.log('Productos obtenidos:', productos);
         setProductos(productos);
-        return productos;
       } catch (error) {
         console.error('Error:', error);
-        return {};
       }
-      
     };
+    
+    // Llamada inicial para obtener productos
+    fetchProductos();
+  }, []);
 
+  // Función para mostrar un mensaje temporal
+  const mostrarAviso = (mensaje) => {
+    setMensaje(mensaje);
+    setMostrarMensaje(true);
+    setTimeout(() => {
+      setMostrarMensaje(false);
+    }, 2000); // Ocultar después de 2 segundos
+  };
 
-    fetchProductos();}, []);
-  
-
-
+  // Función para eliminar un producto
   const eliminarProducto = async (id) => {
     const eliminado = await borrarProducto(id);
     if (eliminado) {
-      // Actualiza el estado eliminando el producto que ha sido borrado
-      setProductos((prevProductos) => prevProductos.filter((producto) => producto.id !== id));
       mostrarAviso('Producto eliminado');
+      // Actualiza la lista de productos haciendo un nuevo fetch
+      async function fetchProductos() {
+        try {
+          const response = await fetch('https://back-end-artlimpieza.vercel.app/producto');
+          const productosActualizados = await response.json();
+          setProductos(productosActualizados);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+      fetchProductos(); // Hacer el nuevo fetch después de eliminar el producto
     }
   };
 
-  const mostrarAviso = (mensaje) => {
-    setMensaje(mensaje);
-    setMostrarMensaje(true); // Mostrar el mensaje
-    setTimeout(() => {
-      setMostrarMensaje(false); // Ocultar después de 3 segundos
-    }, 2000);
-  };
   return (
     <div className="bg-white">
 
       <div className="w-1/1 max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl  lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-center text-indigo-900">ADMINISTRAR PRODUCTOS</h2>
+        <h2 className="text-3xl font-light tracking-tight text-indigo-900 uppercase">ADMINISTRAR PRODUCTOS</h2>
   
         <div className="mt-6 gap-x-6 gap-y-10 flex flex-col ">
           { Object.keys(productos).map(key => {
@@ -100,7 +107,7 @@ useEffect(() =>{
           })}
         </div>
       </div>
-      <Link  className="ml-2 bg-blue-500 text-white px-2 py-1 rounded block m-auto" href="/carrito">volver a inicio</Link>
+      <Link  className="ml-2 bg-blue-500 text-white px-2 py-1 rounded block w-1/2 m-auto" href="/carrito">volver a inicio</Link>
       {/* Notificación */}
       {mostrarMensaje && (
           <div className="fixed top-0 right-0 m-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-md">

@@ -1,6 +1,6 @@
 const borrarProducto = async (id) => {
   try {
-    const response = await fetch(`https://artlimpieza-back-end.vercel.app/producto/${id}`, {
+    const response = await fetch(`https://artlimpieza-back-4tzgk8uo8-alancito1298s-projects.vercel.app/producto/${id}`, {
       method: 'DELETE',
     });
 

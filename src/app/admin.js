@@ -34,29 +34,31 @@ function ProductosTabla() {
 }, []);
 
   // Función para agregar un nuevo producto
-  const handleAddProduct = async (nuevoProducto) => {
-    // Agregar el nuevo producto al estado local
-    setProductos((prevProductos) => [...prevProductos, nuevoProducto]);
+const handleAddProduct = async (nuevoProducto) => {
+  // Lógica para enviar el nuevo producto a la API
+  try {
+    const response = await fetch('https://back-end-artlimpieza.vercel.app/producto', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(nuevoProducto),
+    });
 
-    // Lógica para enviar el nuevo producto a la API
-    try {
-      const response = await fetch('https://artlimpieza-back-86ch7go5w-alancito1298s-projects.vercel.app/producto', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(nuevoProducto),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      console.log('Producto agregado con éxito');
-    } catch (error) {
-      console.error('Error al enviar el producto:', error);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  };
+
+    const productoAgregado = await response.json(); // Obtener el producto que devuelve el servidor
+    
+    // Agregar el nuevo producto al estado local solo si la API respondió correctamente
+    setProductos((prevProductos) => [...prevProductos, productoAgregado]);
+
+    console.log('Producto agregado con éxito');
+  } catch (error) {
+    console.error('Error al enviar el producto:', error);
+  }
+};
 
   // Función para eliminar un producto
   const handleDelete = async (id) => {
