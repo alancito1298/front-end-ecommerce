@@ -10,29 +10,31 @@ function ProductosAdmin() {
   const [mostrarMensaje, setMostrarMensaje] = useState(false); // Estado para mostrar/ocultar mensaje
 
   useEffect(() => {
-    // Función para cargar los productos
-    const fetchProductos = async () => {
-      try {
-        const response = await fetch('https://back-end-artlimpieza.vercel.app/producto');
-        if (!response.ok) {
-          throw new Error('Error al obtener los productos');
-        }
-        const productos = await response.json();
-        console.log('Productos obtenidos:', productos);
-        setProductos(productos);
-        return productos;
-      } catch (error) {
-        console.error('Error:', error);
-        return {};
+   // Cargar los productos desde la API
+   const fetchProductos = async () => {
+    try {
+      const response = await fetch('https://back-end-artlimpieza.vercel.app/producto');
+      if (!response.ok) {
+        throw new Error('Error al obtener los productos');
       }
-    };
+      const productosJson = await response.json();
 
-  
-  
-    
-    // Llamada inicial para obtener productos
-    fetchProductos();
-  }, []);
+      // Convertir el objeto recibido en un array de productos
+      const productosArray = Object.values(productosJson);
+
+      // Ordenar los productos alfabéticamente por 'nombreProducto'
+      const productosOrdenados = productosArray.sort((a, b) =>
+        a.nombreProducto.localeCompare(b.nombreProducto)
+      );
+      
+      setProductos(productosOrdenados); // Actualiza el estado con los productos ordenados
+    } catch (error) {
+      console.error('Error al obtener productos:', error);
+    }
+  };
+
+  fetchProductos();
+}, []);
 
   // Función para mostrar un mensaje temporal
   const mostrarAviso = (mensaje) => {
@@ -70,11 +72,10 @@ function ProductosAdmin() {
         <h2 className="text-3xl font-light tracking-tight text-indigo-900 uppercase">ADMINISTRAR PRODUCTOS</h2>
   
         <div className="mt-6 gap-x-6 gap-y-10 flex flex-col ">
-          { Object.keys(productos).map(key => {
-            const producto = productos[key]; 
-            return (
+          { productos.length > 0 ? (
+            productos.map((producto) => (
               
-              <div key={key} className="flex flex-col ">
+              <div key={producto.id} className="flex flex-col ">
                 <div className="mt-0 flex justify-around items-center border-b-2 border-gray-200">
                   <div className='w-1/2'>
                     <h3 className="text-xl  w m-4 p-0 flex-initial w-auto uppercase text-indigo-950">
@@ -109,8 +110,10 @@ function ProductosAdmin() {
                </div>
                 </div>
               </div>
-            );
-          })}
+            )))
+             : (
+            <p className="text-center text-red-600">Cargando productos...</p>
+          )}
         </div>
       </div>
       <Link  className="ml-2 bg-blue-500 text-white px-2 py-1 rounded block w-1/2 m-auto" href="/carrito">volver a inicio</Link>

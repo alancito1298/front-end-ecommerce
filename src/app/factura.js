@@ -77,7 +77,7 @@ function Factura() {
                       key={producto.id}
                       className="border-b border-gray-300"
                     >
-                      <td className="py-1  pl-2 text-indigo-900 uppercase">{producto.nombreProducto}<br></br><small className='text-sm lowercase text-indigo-500'>{producto.detalleProducto}</small></td>
+                      <td className="py-1  text-sm pl-2 text-indigo-900 uppercase">{producto.nombreProducto}<br></br><small className='text-sm lowercase text-indigo-500'>{producto.detalleProducto}</small></td>
                       <td></td>
                       <td className="p-0 pr-3 text-gray-900">
                         <strong className="text-indigo-600">{producto.quantity}</strong>
