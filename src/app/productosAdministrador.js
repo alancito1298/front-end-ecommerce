@@ -6,64 +6,60 @@ import React, { useEffect, useState } from 'react';
 
 function ProductosAdmin() {
   const [productos, setProductos] = useState([]);
-  const [mensaje, setMensaje] = useState(''); // Estado para el mensaje
-  const [mostrarMensaje, setMostrarMensaje] = useState(false); // Estado para mostrar/ocultar mensaje
+  const [mensaje, setMensaje] = useState('');
+  const [mostrarMensaje, setMostrarMensaje] = useState(false);
 
   useEffect(() => {
-   // Cargar los productos desde la API
-   const fetchProductos = async () => {
-    try {
-      const response = await fetch('https://back-end-artlimpieza.vercel.app/producto');
-      if (!response.ok) {
-        throw new Error('Error al obtener los productos');
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch('https://back-end-artlimpieza.vercel.app/producto');
+        if (!response.ok) {
+          throw new Error('Error al obtener los productos');
+        }
+        const productosJson = await response.json();
+        const productosArray = Object.keys(productosJson).map((key) => ({
+          ...productosJson[key],
+          productoId: key,  // Asigna la clave única al campo `productoId` o el nombre que corresponda
+        }));
+
+        // Ordenar alfabéticamente por 'nombreProducto'
+      productosArray.sort((a, b) => a.nombreProducto.localeCompare(b.nombreProducto));
+
+        setProductos(productosArray);
+      } catch (error) {
+        console.error('Error al obtener productos:', error);
       }
-      const productosJson = await response.json();
+   
+   
+   
+    };
 
-      // Convertir el objeto recibido en un array de productos
-      const productosArray = Object.values(productosJson);
+    fetchProductos();
+  }, []);
 
-      // Ordenar los productos alfabéticamente por 'nombreProducto'
-      const productosOrdenados = productosArray.sort((a, b) =>
-        a.nombreProducto.localeCompare(b.nombreProducto)
-      );
-      
-      setProductos(productosOrdenados); // Actualiza el estado con los productos ordenados
+  const eliminarProducto = async (productoId) => {
+    try {
+      const response = await fetch(`https://back-end-artlimpieza.vercel.app/producto/${productoId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al eliminar el producto');
+      }
+
+      setProductos(productos.filter(producto => producto.productoId !== productoId));
+      mostrarAviso('Producto eliminado');
+      setTimeout(() => window.location.reload(), 1000);
     } catch (error) {
-      console.error('Error al obtener productos:', error);
+      console.error('Error al eliminar el producto:', error);
     }
   };
 
-  fetchProductos();
-}, []);
-
-  // Función para mostrar un mensaje temporal
   const mostrarAviso = (mensaje) => {
     setMensaje(mensaje);
     setMostrarMensaje(true);
-    setTimeout(() => {
-      setMostrarMensaje(false);
-    }, 2000); // Ocultar después de 2 segundos
+    setTimeout(() => setMostrarMensaje(false), 2000);
   };
-
-  // Función para eliminar un producto
-  const eliminarProducto = async (id) => { try {
-    const response = await fetch(`https://back-end-artlimpieza.vercel.app/producto/${id}`, {
-      method: 'DELETE',
-    });
-    
-    if (!response.ok) {
-      throw new Error('Error al eliminar el producto');
-    }else{
-      alert("producto eliminado")
-    }
-
-    return true; // Retorna true si la eliminación fue exitosa
-  } catch (error) {
-    console.error('Error:', error);
-    return false; // Retorna false si hubo un error
-  } 
-    }
-  ;
 
   return (
     <div className="bg-white">
@@ -89,7 +85,7 @@ function ProductosAdmin() {
                 
                 <button
                     className="ml-2 bg-red-500 text-white px-2 py-1 rounded flex-none w-14"
-                    onClick={() => eliminarProducto(key)}
+                    onClick={() => eliminarProducto(producto.productoId)}
                   >
                    <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                   <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>

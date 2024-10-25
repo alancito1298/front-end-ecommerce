@@ -63,7 +63,7 @@ const handleAddProduct = async (nuevoProducto) => {
   // Función para eliminar un producto
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`/api/products?id=${id}`, {
+      const response = await fetch(`https://back-end-artlimpieza.vercel.app/producto?id=${id}`, {
         method: 'DELETE',
       });
 

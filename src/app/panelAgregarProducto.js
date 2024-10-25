@@ -50,6 +50,7 @@ const PanelAgregarProducto = ({ onAddProduct }) => {
     }
     finally {
       setIsSubmitting(false); // Rehabilitar el botón después del envío
+      setTimeout(() => window.location.reload(), 500);
     }
   };
   

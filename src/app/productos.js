@@ -134,7 +134,7 @@ function Productos() {
         </div>
       </div>
       <Link
-        className="text-center uppercase bg-indigo-500 text-white px-2 py-1 rounded block mt-0 m-auto w-1/4"
+        className="text-center uppercase bg-indigo-600  px-2 py-1  block mt-0 m-auto w-1/4 fixed bottom-4 right-4  text-white p-4 rounded-l shadow-lg hover:bg-blue-600 focus:outline-none"
         href="/carrito"
       >
         Finalizar Compra
