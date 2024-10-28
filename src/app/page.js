@@ -6,6 +6,7 @@ import ProductosTabla from './admin'
 import Carrito from './carrito.js'
 import Footer from './footer'
 import Factura from './factura'
+import LoginForm from './login'
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
  
      <Nav></Nav>
      <Inicio></Inicio>
+
     <Footer></Footer>
     
      </>
