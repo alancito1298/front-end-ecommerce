@@ -7,14 +7,14 @@ import Carrito from './carrito.js'
 import Footer from './footer'
 import Factura from './factura'
 import LoginForm from './login'
-
+import FormEditarPrecio from './editar'
 export default function Home() {
   return (
     <>
  
      <Nav></Nav>
      <Inicio></Inicio>
-
+   
     <Footer></Footer>
     
      </>
