@@ -8,6 +8,8 @@ function Productos() {
   const [productos, setProductos] = useState([]);
   const [mensaje, setMensaje] = useState(''); // Estado para el mensaje
   const [mostrarMensaje, setMostrarMensaje] = useState(false); // Estado para mostrar/ocultar mensaje
+  const [busqueda, setBusqueda] = useState(""); 
+  const [productosOriginales, setProductosOriginales] = useState([]);
 
   useEffect(() => {
     // Inicializa el carrito en el localStorage
@@ -26,27 +28,22 @@ function Productos() {
     const fetchProductos = async () => {
       try {
         const response = await fetch('https://back-end-artlimpieza.vercel.app/producto');
-        if (!response.ok) {
-          throw new Error('Error al obtener los productos');
-        }
+        if (!response.ok) throw new Error('Error al obtener los productos');
+        
         const productosJson = await response.json();
-
-        // Convertir el objeto recibido en un array de productos
-        const productosArray = Object.values(productosJson);
-
-        // Ordenar los productos alfabéticamente por 'nombreProducto'
-        const productosOrdenados = productosArray.sort((a, b) =>
+        const productosArray = Object.values(productosJson).sort((a, b) =>
           a.nombreProducto.localeCompare(b.nombreProducto)
         );
         
-        setProductos(productosOrdenados); // Actualiza el estado con los productos ordenados
+        setProductos(productosArray);
+        setProductosOriginales(productosArray); // Guarda una copia de la lista original
       } catch (error) {
         console.error('Error al obtener productos:', error);
       }
     };
-
     fetchProductos();
   }, []);
+
 
   const agregarProducto = (producto) => {
     if (typeof window !== 'undefined') {
@@ -88,11 +85,53 @@ function Productos() {
     }, 2000);
   };
 
+
+  const handleChange = (e) => {
+    const valorBusqueda = e.target.value;
+    setBusqueda(valorBusqueda);
+    filtrado(valorBusqueda);
+  };
+
+  const filtrado = (busquedaActual) => {
+    if (!busquedaActual) {
+      setProductos(productosOriginales); // Restaura la lista original si no hay búsqueda
+    } else {
+      const resultadoBusqueda = productosOriginales.filter((producto) =>
+        producto.nombreProducto.toLowerCase().includes(busquedaActual.toLowerCase())
+      );
+      setProductos(resultadoBusqueda);
+    }
+  };
+
   return (
     <div className="bg-white pb-10 w-full flex flex-col items-center">
       <div className="w-full max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="text-2xl font-light tracking-tight text-indigo-900 uppercase">Productos</h2>
-
+        <div class="flex justify-center p-4">
+    <div class="relative w-full max-w-md">
+        <input
+            type="text"
+            placeholder="Buscar..."
+            value={busqueda}
+            onChange={handleChange}
+            className="w-full p-3 pl-10 pr-4 border text-indigo-800 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+        />
+        <svg
+            class="absolute left-3 top-3 w-5 h-5 text-indigo-500"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+            />
+        </svg>
+    </div>
+</div>
         <div className="mt-6 gap-x-6 gap-y-10 flex flex-col ">
           {productos.length > 0 ? (
             productos.map((producto) => (
