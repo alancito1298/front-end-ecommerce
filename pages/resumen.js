@@ -8,10 +8,10 @@ import Factura from '@/app/factura';
 
 
 export default function MostrarProductos() {
-  return (<div className='h-96 bg-white'>
-   
+  return (<div className='h-full bg-white '>
+
     <Factura ></Factura>
-  
+
     </div>
   );
 }
