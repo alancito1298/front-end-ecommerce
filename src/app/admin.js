@@ -106,8 +106,8 @@ const handleAddProduct = async (nuevoProducto) => {
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 ${Number.isFinite(producto.precioProducto) ? producto.precioProducto.toFixed(2) : 'N/A'}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <button className="bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-600">Act</button>
+              <td className="px-6 py-4 whitespace-nowrap flex flex-col text-sm font-medium">
+                <button className="bg-cyan-600 text-white px-4 py-2 rounded-md  hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-600">Act</button>
                 <button onClick={() => handleDelete(productos.id)} className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 ml-2">Eli</button>
               </td>
             </tr>

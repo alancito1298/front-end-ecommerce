@@ -114,7 +114,7 @@ function ProductosAdmin() {
             productosFiltrados.map((producto) => (
               <div key={producto.productoId} className="flex flex-col ">
                 <div className="mt-0 flex justify-around items-center border-b-2 border-gray-200">
-                  <div className='w-1/2'>
+                  <div className='w-full'>
                     <h3 className="text-xl w m-4 p-0 flex-initial w-auto uppercase text-indigo-950">
                       {producto.nombreProducto || "sin nombre"}
                     </h3>
@@ -123,9 +123,9 @@ function ProductosAdmin() {
                       <small className='m-1'>$</small>{formatearDinero(producto.precioProducto)}
                     </p>
                   </div>
-                  <div className='flex felx-col items-center justify-start m-0'> 
+                  <div className='flex flex-col gap-2 items-center justify-start m-0'> 
                     <button
-                      className="ml-2 bg-red-500 text-white px-2 py-1 rounded flex-none w-14"
+                      className="ml-2 bg-red-500 text-white px-2 py-1 rounded flex-none w-12"
                       onClick={() => eliminarProducto(producto.productoId)}
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16">
@@ -134,7 +134,7 @@ function ProductosAdmin() {
                     </button>
 
                     <button
-                      className="ml-2 bg-yellow-500 text-white px-2 py-1 rounded flex-none w-14"
+                      className="ml-2 bg-yellow-500 text-white px-2 py-1 rounded flex-none w-12"
                       onClick={() => editarProducto(producto)}
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
