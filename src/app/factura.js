@@ -2,7 +2,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import formatearDinero from './funciones/darFormatoDinero';
 import html2canvas from 'html2canvas';
-
+import  Btn from './components/btn'
+import  Icon  from "./icon/icons"
 function Factura() {
   const [carrito, setCarrito] = useState([]);
   const [totalCarrito, setTotalCarrito] = useState(0);
@@ -69,7 +70,9 @@ function Factura() {
       alert("La funcionalidad de compartir no está soportada en este navegador.");
     }
   };
-
+  const handleRedirect = () => {
+    window.location.href = '/carrito'; // Redirige a la URL deseada
+  };
   return (
     <div className='bg-red-100'>
       <div className="mx-auto w-full h-vw max-w-7xl">
@@ -109,21 +112,28 @@ function Factura() {
             </footer>
             </div>
           <div className='flex flex-col items-center gap-3 m-6'>
-            <a href='/carrito' className='ml-2 h-12 bg-indigo-500 text-white p-0 gap-2 uppercase px-3 rounded flex flex-row items-center justify-start w-56'>← volver al carrito</a>
-            <button onClick={descargarImagen} className='ml-2 h-12 bg-green-500 text-white p-0 gap-2 uppercase px-3 rounded flex flex-row items-center justify-start w-56'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="auto" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
-              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0"/>
-            </svg>
-            Descargar Factura
-            </button>
-            <button onClick={compartirFactura} className='ml-2 h-12 bg-blue-500 text-white p-0 gap-2 uppercase px-3 rounded flex flex-row items-center justify-start w-56'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="auto" fill="currentColor" class="bi bi-share-fill" viewBox="0 0 16 16">
-              <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5"/>
-            </svg>
-            Compartir Factura
-            </button>
+  
+       
+            <Btn
+        texto="Compartir Factura"
+        color="bg-blue-700 w-auto"
+        icono={Icon.compartir}
+        onClick={compartirFactura}
+      />
+       <Btn
+        texto="Volver a carrito"
+        color="bg-indigo-700"
+        icono={Icon.volver}
+        onClick={handleRedirect}
+      />
+          <Btn
+        texto="Descargar Factura"
+        color="bg-green-700"
+        icono={Icon.descargar}
+        onClick={descargarImagen}
+      />
             </div>
-          
+            
           </div>
         </div>
       </div>
