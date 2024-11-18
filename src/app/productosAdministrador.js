@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import borrarProducto from './funciones/borrarProducto';
-import formatearDinero from './funciones/darFormatoDinero';
+import borrarProducto from './utils/borrarProducto';
+import formatearDinero from './utils/darFormatoDinero';
 import React, { useEffect, useState } from 'react';
 
 function ProductosAdmin() {
