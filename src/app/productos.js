@@ -152,7 +152,7 @@ function Productos() {
                   <div className="flex flex-col items-center justify-start m-0">
                   
                            <BtnSecundario
-                          texto=""
+                    
                           color="bg-green-800 white"
                           icono={Icon.agregar}
                           onClick={() => agregarProducto(producto)}/>
