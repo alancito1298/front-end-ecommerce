@@ -4,7 +4,7 @@ import borrarProducto from './utils/borrarProducto';
 import formatearDinero from './utils/darFormatoDinero';
 import React, { useEffect, useState } from 'react';
 import  Icon  from "./icon/icons"
-import BtnSecundario from "./components/btn-secundario"
+import BtnSecundario from "./components/Btn-secundario"
 
 function Productos() {
   const [productos, setProductos] = useState([]);

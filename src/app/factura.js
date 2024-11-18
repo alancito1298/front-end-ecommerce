@@ -2,7 +2,7 @@
 'use client';
 import React, { useEffect, useState, useRef } from 'react';
 import formatearDinero from './utils/darFormatoDinero';
-import Btn from './components/btn';
+import Btn from './components/Btn';
 import Icon from './icon/icons';
 
 import { iniciarCarrito } from './utils/localStorage';
