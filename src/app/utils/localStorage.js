@@ -10,3 +10,18 @@ export const iniciarCarrito = (setCarrito) => {
     }
   };
   
+// Obtiene el carrito desde localStorage
+export function obtenerCarrito() {
+  const carritoGuardado = localStorage.getItem('carrito');
+  return carritoGuardado ? JSON.parse(carritoGuardado) : [];
+}
+
+// Actualiza el carrito en localStorage
+export function actualizarCarritoLocalStorage(nuevoCarrito) {
+  localStorage.setItem('carrito', JSON.stringify(nuevoCarrito));
+}
+
+// Vacía el carrito de localStorage
+export function vaciarCarritoLocalStorage() {
+  localStorage.removeItem('carrito');
+}

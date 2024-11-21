@@ -1,3 +1,8 @@
+import { manejarAviso } from "./manejarAviso";
+
+
+
+
 export function calcularTotal(carrito) {
   return carrito.reduce(
     (acumulador, producto) => acumulador + producto.precioProducto * producto.quantity,
@@ -24,8 +29,17 @@ export function disminuirCantidad(id, carrito, setCarrito, setTotalCarrito) {
   setTotalCarrito(calcularTotal(nuevoCarrito));
 }
 
-export function eliminarProducto(id, carrito, setCarrito, setTotalCarrito) {
+export function eliminarProducto(id, carrito, setCarrito, setTotal) {
   const nuevoCarrito = carrito.filter((producto) => producto.id !== id);
   setCarrito(nuevoCarrito);
-  setTotalCarrito(calcularTotal(nuevoCarrito));
+  actualizarLocalStorage(nuevoCarrito);
+  setTotal(calcularTotal(nuevoCarrito));
+ 
 }
+
+export function actualizarLocalStorage(carrito) {
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+
+
