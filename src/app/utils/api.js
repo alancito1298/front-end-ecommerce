@@ -20,13 +20,29 @@ export const obtenerProductos = async () => {
  * @param {string} productoId - ID del producto.
  * @param {number} nuevoPrecio - Nuevo precio del producto.
  */
-export const actualizarPrecioProducto = async (productoId, nuevoPrecio) => {
-  const response = await fetch(`${API_BASE_URL}/${productoId}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ precioProducto: nuevoPrecio }),
-  });
-  if (!response.ok) throw new Error('Error al actualizar el precio');
+export const actualizarPrecioProducto = async () => {
+  try {
+    const response = await fetch(`https://back-end-artlimpieza.vercel.app/producto/${productoEditando.productoId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ precioProducto: parseInt(precioNuevo) }),
+    });
+
+    if (response.ok) {
+      const productosActualizados = productos.map((p) =>
+        p.productoId === productoEditando.productoId ? { ...p, precioProducto: parseInt(precioNuevo) } : p
+      );
+      setProductos(productosActualizados);
+      setProductoEditando(null);
+      mostrarAviso('Precio actualizado correctamente');
+    } else {
+      console.error('Error al actualizar el precio');
+    }
+  } catch (error) {
+    console.error('Error al enviar el precio:', error);
+  }
 };
 
 /**

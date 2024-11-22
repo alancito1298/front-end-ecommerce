@@ -5,15 +5,18 @@ import { obtenerProductos, actualizarPrecioProducto, eliminarProducto } from './
 import { ordenarProductosPorNombre } from './utils/ordenamiento';
 import ProductosLista from './components/ProductosLista';
 import EditarProductoModal from './components/EditarProductoModal';
-import Notificacion from './components/Notificacion';
+import Aviso from './components/Aviso';
+import formatearDinero from './utils/darFormatoDinero';
 
 const ProductosAdmin = () => {
   const [productos, setProductos] = useState([]);
-  const [mensaje, setMensaje] = useState('');
-  const [mostrarMensaje, setMostrarMensaje] = useState(false);
+  const [mensajeAviso, setMensajeAviso] = useState(''); // Mensaje del aviso
+  const [colorAviso, setColorAviso] = useState(''); // Color del aviso
+  const [mostrarAviso, setMostrarAviso] = useState(false); // Control de visibilidad del aviso
   const [busqueda, setBusqueda] = useState('');
   const [productoEditando, setProductoEditando] = useState(null);
 
+  // Obtener productos al cargar el componente
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -26,37 +29,45 @@ const ProductosAdmin = () => {
     fetchProductos();
   }, []);
 
-  const mostrarAviso = (mensaje) => {
-    setMensaje(mensaje);
-    setMostrarMensaje(true);
-    setTimeout(() => setMostrarMensaje(false), 2000);
+  // Función para mostrar el aviso
+  const manejarAviso = (mensaje, color) => {
+    setMensajeAviso(mensaje);
+    setColorAviso(color);
+    setMostrarAviso(true);
+    setTimeout(() => setMostrarAviso(false), 3000); // Ocultar aviso después de 3 segundos
   };
 
-  const actualizarProducto = async (productoId, nuevoPrecio) => {
+  // Actualizar el precio de un producto
+  const actualizarProducto = async (id, nuevoPrecio) => {
     try {
-      await actualizarPrecioProducto(productoId, nuevoPrecio);
+      await actualizarPrecioProducto(id, nuevoPrecio);
       setProductos((prevProductos) =>
         prevProductos.map((producto) =>
-          producto.productoId === productoId ? { ...producto, precioProducto: nuevoPrecio } : producto
+          producto.id === id ? { ...producto, precioProducto: nuevoPrecio } : producto
         )
       );
       setProductoEditando(null);
-      mostrarAviso('Producto actualizado correctamente');
+      manejarAviso('Producto Actualizado', 'bg-indigo-500');
     } catch (error) {
       console.error('Error al actualizar producto:', error);
+      manejarAviso('Error al actualizar producto', 'bg-red-500');
     }
   };
 
+  
+  // Eliminar un producto
   const eliminarProductoHandler = async (productoId) => {
     try {
       await eliminarProducto(productoId);
       setProductos((prevProductos) => prevProductos.filter((producto) => producto.productoId !== productoId));
-      mostrarAviso('Producto eliminado');
+      manejarAviso('Producto Eliminado', 'bg-red-500');
     } catch (error) {
       console.error('Error al eliminar producto:', error);
+      manejarAviso('Error al eliminar producto', 'bg-red-500');
     }
   };
 
+  // Filtrar productos por búsqueda
   const productosFiltrados = productos.filter((producto) =>
     producto.nombreProducto.toLowerCase().includes(busqueda.toLowerCase())
   );
@@ -92,7 +103,12 @@ const ProductosAdmin = () => {
         />
       )}
 
-      {mostrarMensaje && <Notificacion mensaje={mensaje} />}
+      <Aviso
+        mensaje={mensajeAviso}
+        color={colorAviso}
+        mostrar={mostrarAviso}
+        onClose={() => setMostrarAviso(false)}
+      />
     </div>
   );
 };
