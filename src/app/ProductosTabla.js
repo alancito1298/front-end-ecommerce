@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import PanelAgregarProducto from './panelAgregarProducto';
+import PanelAgregarProducto from './components/panelAgregarProducto';
 
 function ProductosTabla() {
   const [productos, setProductos] = useState([]);

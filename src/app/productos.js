@@ -4,7 +4,7 @@ import Busqueda from './components/Busqueda';
 import ProductosListaHome from './components/ProductosListaHome';
 import BtnFlotante from './components/BtnFlotante';
 import Aviso from './components/Aviso';
-import { manejarAviso } from './utils/manejarAviso';
+
 import Icon from './icon/icons';
 
 

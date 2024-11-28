@@ -34,14 +34,14 @@ const LoginForm = () => {
     }
   };
 
-  return (
+  return (<div className='w-full bg-white'>
     <form
       onSubmit={handleLogin}
-      className="space-y-4 p-6 bg-white rounded shadow-md pt-16 pb-40"
+      className="space-y-4 p-6 bg-white rounded max-w-72  shadow-md pt-16 pb-40"
     >
-      <h2 className="text-2xl font-semibold text-center uppercase text-indigo-600 mt-10">Identificate</h2>
+      <h2 className="text-2xl font-semibold text-center uppercase text-indigo-600 mt-10 ">Identificate</h2>
       {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-      <div>
+      <div className=''>
         <label className="block">Email</label>
         <input
           type="email"
@@ -56,7 +56,7 @@ const LoginForm = () => {
           type="password" // Cambiar a type="password"
           value={password} // Cambiar a value para un campo controlado
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 border rounded text-black"
+          className="w-1/3 p-2 border rounded text-black "
         />
       </div>
       <button
@@ -65,7 +65,7 @@ const LoginForm = () => {
       >
         Iniciar Sesión
       </button>
-    </form>
+    </form></div>
   );
 };
 

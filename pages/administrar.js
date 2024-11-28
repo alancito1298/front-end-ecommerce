@@ -1,7 +1,7 @@
 import '../src/app/globals.css';
 import React  from "react";
-import Nav from "@/app/nav";
-import PanelAgregarProducto from '@/app/panelAgregarProducto';
+import Nav from "@/app/components/nav";
+import PanelAgregarProducto from '../src/app/components/panelAgregarProducto';
 import Footer from '@/app/footer';
 import ProductosAdmin from '@/app/productosAdministrador';
 

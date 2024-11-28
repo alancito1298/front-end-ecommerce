@@ -1,7 +1,7 @@
 import '../src/app/globals.css';
 import React  from "react";
-import LoginForm from '@/app/login';
-import Nav from "@/app/nav";
+import LoginForm from '../src/app/components/Login';
+import Nav from "../src/app/components/nav";
 import Footer from '@/app/footer';
 
 

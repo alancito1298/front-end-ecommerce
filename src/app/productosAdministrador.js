@@ -6,7 +6,7 @@ import { ordenarProductosPorNombre } from './utils/ordenamiento';
 import ProductosLista from './components/ProductosLista';
 import EditarProductoModal from './components/EditarProductoModal';
 import Aviso from './components/Aviso';
-import formatearDinero from './utils/darFormatoDinero';
+
 
 const ProductosAdmin = () => {
   const [productos, setProductos] = useState([]);
