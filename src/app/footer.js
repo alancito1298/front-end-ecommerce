@@ -86,7 +86,7 @@ return(<div className="block bg-indigo-50">
       Villa Mantero, Entre Ríos 
     </p> <br></br>
     <p  className="text-sm sm:text-base text-indigo-300">
-        Desarrollado por <a href="#" className="text-sm sm:text-base text-indigo-500">Alan Amarillo</a>
+        Desarrollado por <a href="https://cv-sigma-umber.vercel.app" className="text-sm sm:text-base text-indigo-500">Alan Amarillo</a>
     </p>
   </div>
 </div>

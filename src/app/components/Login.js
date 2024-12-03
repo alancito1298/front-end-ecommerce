@@ -34,34 +34,34 @@ const LoginForm = () => {
     }
   };
 
-  return (<div className='w-full bg-white'>
+  return (<div className='w-full py-24 bg-indigo-50'>
     <form
       onSubmit={handleLogin}
-      className="space-y-4 p-6 bg-white rounded max-w-72  shadow-md pt-16 pb-40"
+      className="space-y-10 p-6 bg-white rounded max-w-96 pt-2  block m-auto  shadow-md  pb-16 gap-10"
     >
       <h2 className="text-2xl font-semibold text-center uppercase text-indigo-600 mt-10 ">Identificate</h2>
       {errorMessage && <p className="text-red-600">{errorMessage}</p>}
       <div className=''>
-        <label className="block">Email</label>
+        <label  className="block text-indigo-800 uppercase font-light text-sm">Email</label>
         <input
           type="email"
           value={email} // Cambiar a value para un campo controlado
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 border rounded text-black"
+          className=" w-full p-2 border rounded text-black "
         />
       </div>
       <div>
-        <label className="block">Contraseña</label>
+        <label className="block text-indigo-800 uppercase font-light text-sm">Contraseña</label>
         <input
           type="password" // Cambiar a type="password"
           value={password} // Cambiar a value para un campo controlado
           onChange={(e) => setPassword(e.target.value)}
-          className="w-1/3 p-2 border rounded text-black "
+          className=" w-full p-2 border rounded text-black "
         />
       </div>
       <button
         type="submit"
-        className="w-full py-2 mt-4 text-white bg-blue-600 rounded hover:bg-blue-700"
+        className="w-full py-2  text-white bg-blue-600 rounded hover:bg-blue-700"
       >
         Iniciar Sesión
       </button>
