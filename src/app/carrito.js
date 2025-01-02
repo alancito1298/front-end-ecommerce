@@ -19,10 +19,21 @@ function Carrito() {
   const [mensajeAviso, setMensajeAviso] = useState('');
   const [colorAviso, setColorAviso] = useState('');
 
- 
-  // Cargar carrito desde localStorage al montar el componente
+  // Inicializar carrito en localStorage si no existe
+  const iniciarCarrito = () => {
+    if (typeof window !== 'undefined') {
+      const carritoExistente = localStorage.getItem('carrito');
+      if (!carritoExistente) {
+        localStorage.setItem('carrito', JSON.stringify([]));
+      }
+    }
+  };
+
   useEffect(() => {
-    const carritoLocal = JSON.parse(localStorage.getItem('carrito')) || [];
+    iniciarCarrito();
+
+    // Cargar carrito desde localStorage
+    const carritoLocal = JSON.parse(localStorage.getItem('carrito') || '[]'); // Manejar caso donde sea null
     setCarrito(carritoLocal);
     setTotalCarrito(calcularTotal(carritoLocal));
   }, []);
@@ -36,11 +47,10 @@ function Carrito() {
     manejarAviso('Carrito vacío con éxito', 'bg-red-600', setMensajeAviso, setColorAviso, setMostrarAviso);
   };
 
-
   return (
     <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gray-100 pt-16">
       <h1 className="text-2xl font-bold mb-4 text-indigo-800 uppercase mt-10">Carrito de Compras</h1>
-      <div className="w-4/5 bg-indigo-200 rounded-lg shadow-md p-2 gap-3 ">
+      <div className="w-4/5 bg-indigo-200 rounded-lg shadow-md p-2 gap-3">
         {carrito.length > 0 ? (
           carrito.map((producto) => (
             <ProductoEnCarrito
@@ -57,15 +67,12 @@ function Carrito() {
       </div>
       {carrito.length > 0 && (
         <ResumenCarrito
-       
           total={totalCarrito}
           onNuevaCompra={vaciarCarrito}
           onSeguirComprando={() => (window.location.href = '/productos')}
           onFinalizarCompra={() => (window.location.href = '/resumen')}
         />
-        
-      )
-      }
+      )}
       <Aviso
         mensaje={mensajeAviso}
         color={colorAviso}
@@ -77,3 +84,4 @@ function Carrito() {
 }
 
 export default Carrito;
+

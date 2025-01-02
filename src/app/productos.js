@@ -67,16 +67,30 @@ import Icon from './icon/icons';
     // Función para agregar productos al carrito
     const agregarProducto = (producto) => {
       if (typeof window !== 'undefined') {
-        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        let carrito;
+        try {
+          carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        } catch (error) {
+          console.error('Error al analizar el carrito de localStorage:', error);
+          carrito = [];
+        }
+    
         const productoIndex = carrito.findIndex((item) => item.id === producto.id);
-  
+    
         if (productoIndex > -1) {
           carrito[productoIndex].quantity = (carrito[productoIndex].quantity || 1) + 1;
         } else {
           carrito.push({ ...producto, quantity: 1 });
         }
-        manejarAviso('Producto agregado',"bg-green-500");
-      
+    
+        // Actualizar el carrito en localStorage
+        try {
+          localStorage.setItem('carrito', JSON.stringify(carrito));
+          manejarAviso('Producto agregado', 'bg-green-500');
+        } catch (error) {
+          console.error('Error al guardar el carrito en localStorage:', error);
+          manejarAviso('No se pudo agregar el producto', 'bg-red-500');
+        }
       }
     };
   

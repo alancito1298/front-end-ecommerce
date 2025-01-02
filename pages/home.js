@@ -9,8 +9,8 @@ import Inicio from '@/app/inicio';
 export default function Mostrarhome() {
   return (<div>
 <Nav/>
-    <Inicio
-<Footer/>    
+    <Inicio></Inicio>
+<Footer/>   
     </div>
   );
 }
