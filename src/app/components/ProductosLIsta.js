@@ -1,5 +1,5 @@
 import React from 'react';
-import BtnSecundario from './Btn-secundario';
+import BtnSecundario from './BtnSecundario';
 import Icon from '../icon/icons';
 import formatearDinero from '../utils/darFormatoDinero';
 

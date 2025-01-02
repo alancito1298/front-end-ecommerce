@@ -1,6 +1,6 @@
 'use cliente'
 import React from 'react';
-import BtnSecundario from './Btn-secundario';
+import BtnSecundario from './BtnSecundario';
 import Icon from '../icon/icons';
 import { aumentarCantidad, disminuirCantidad, eliminarProducto, calcularTotal } from '../utils/carritoUtils'
 import formatearDinero from '../utils/darFormatoDinero'

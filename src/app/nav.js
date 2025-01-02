@@ -5,10 +5,10 @@
     import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
     
     const navigation = [
-      { name: 'Ver Productos', href: '#' },
-      { name: 'Carrito', href: '#' },
+      { name: 'Ver Productos', href: '/productos' },
+      { name: 'Carrito', href: '/carrito' },
       { name: 'Contactos', href: '#' },
-      { name: 'Ingresar', href: '#' },
+      { name: 'Ingresar', href: '/a' },
     ]
 
 export default function Nav(){
