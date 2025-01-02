@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import Btn from './Btn.js';
+import Btn from '@/app/components/Btn'
 
 function EditarProductoModal({ producto, onClose, onActualizar }) {
   const [precioNuevo, setPrecioNuevo] = useState(producto.precioProducto);
