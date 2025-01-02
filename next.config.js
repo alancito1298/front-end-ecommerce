@@ -3,5 +3,6 @@ const nextConfig = {}
 
 module.exports = 
 {
-    reactStrictMode: true
+    reactStrictMode: true,
+  
 }

@@ -1,8 +1,8 @@
 'use client'
 import React, { useState } from 'react';
-import Btn from './Btn';
+import Btn from './Btn.js';
 
-const EditarProductoModal = ({ producto, onClose, onActualizar }) => {
+function EditarProductoModal({ producto, onClose, onActualizar }) {
   const [precioNuevo, setPrecioNuevo] = useState(producto.precioProducto);
 
   const actualizarPrecio = async () => {
@@ -12,7 +12,7 @@ const EditarProductoModal = ({ producto, onClose, onActualizar }) => {
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ precioProducto: parseInt(precioNuevo) }),
+          body: JSON.stringify({ precioProducto: parseInt(precioNuevo) })
         }
       );
 
@@ -36,8 +36,7 @@ const EditarProductoModal = ({ producto, onClose, onActualizar }) => {
           onChange={(e) => setPrecioNuevo(e.target.value)}
           className="mt-4 w-full h-12 p-2 text-xl border rounded text-red-600"
           placeholder="Nuevo precio"
-          aria-label="Nuevo precio"
-        />
+          aria-label="Nuevo precio" />
         <div className="flex flex-col justify-center items-center gap-2 mt-3">
           <Btn texto="Actualizar" color="bg-blue-400" onClick={actualizarPrecio} />
           <Btn texto="Cancelar" color="bg-red-400" onClick={onClose} />
@@ -45,6 +44,6 @@ const EditarProductoModal = ({ producto, onClose, onActualizar }) => {
       </div>
     </div>
   );
-};
+}
 
 export default EditarProductoModal;

@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import Btn from './Btn';
+import Btn from './Btn.js';
 import Icon from '../icon/icons'; 
 import formatearDinero from '../utils/darFormatoDinero';
 
