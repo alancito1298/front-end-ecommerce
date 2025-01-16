@@ -6,7 +6,7 @@ import Inicio from '@/app/inicio';
 
 
 
-export default function Mostrarhome() {
+export default function Home() {
   return (<div>
 <Nav/>
     <Inicio></Inicio>
